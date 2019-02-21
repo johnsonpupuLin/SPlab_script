@@ -21,7 +21,7 @@ It is willing to download those scripts and modify by yourself.
 
 
 If you have any question, you can try to contact me.
-If I still remember how they work, I will try my best to solve your question.
+If I still remember how they work, I will try my best to solve your problem.
 
 
 -HHL
