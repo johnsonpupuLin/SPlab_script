@@ -1,6 +1,6 @@
 
 
-－ 前言
+I. 前言
 
 本文件只能做為非常簡單的入門使用，
 更詳細的教學，可以參考「鳥哥的 Linux 私房菜」。(http://linux.vbird.org/)
@@ -12,7 +12,8 @@
 
 
 
-－ 登入實驗室的 server
+
+II. 登入實驗室的 server
 
 使用工具: pietty
 帳號密碼: 請查閱 trello
@@ -24,7 +25,8 @@
 
 
 
-－ 指令 (command) 與參數 (option) 的基本組成概念
+
+III. 指令 (command) 與參數 (option) 的基本組成概念
 
 在 Linux 中，所有的動作，包括資料夾間的移動、創立檔案、刪除檔案等等，都是以指令來完成的。(沒錯，幾乎沒有滑鼠！)
 同一個指令，可以再加上參數而變化出各式各樣延伸的功能。
@@ -51,20 +53,161 @@ ls 的用途為顯示目錄 (資料夾) 下所有的子目錄與檔案，它的�
 
 你會發現很多以「.」開頭的檔案顯示出來，它們都是平常被隱藏的檔案。
 這便是 Linux 中指令組成的基本概念。
+參數前面加 - 或 -- 並沒有一定，需要看指令的設計。
 至於甚麼指令能輸入甚麼參數，大多可以輸入 -h 或 --help 參數來查閱該指令的說明書。
 你可以試著輸入 --help 來查閱 ls 的說明書，輸入如下:
 
 [splin01@node02 ~]$ ls --help
 
+當你遇到沒用過的指令，或準備開始使用新的程式時，先輸入 -h 或 --help 看看有沒有說明書能夠參考就對了！
 
 
-－ 絕對路徑與相對路徑的概念
+
+
+IV. 絕對路徑與相對路徑的概念
 
 ＊絕對路徑
 
+首先，除了 ls 以外，先介紹兩個最基本的 Linux 指令。
+
+cd 路徑 ← 移動到該路徑的資料夾。
+pwd ← 顯示當前所處資料夾的絕對路徑。
+
 在剛學習 Linux 之初，請先了解並習慣使用「絕對路徑」，即輸入完整的路徑。
-以剛開始當入 splin01 為例，絕對路徑即為:
+以剛開始登入 splin01 為例，登入後所處資料夾的絕對路徑即為:
 
 /data/usrhome/LabSPLin/splin01
+
+剛才提到 pwd 指令可以顯示目前所處資料的絕對路徑，輸入如下:
+
+[splin01@node02 ~]$ pwd
+
+你應該會得到結果如下:
+
+[splin01@node02 ~]$ pwd
+/data/usrhome/LabSPLin/splin01
+
+因此可以知道，目前我們位在 「splin01」這個資料夾內。
+回到上方提到的 ls 指令，該指令的預設指令對象為當前目錄。
+換句話說，如果你依照下列方式打入指令，會獲得一樣的結果:
+
+[splin01@node02 ~]$ ls
+[splin01@node02 ~]$ ls /data/usrhome/LabSPLin/splin01
+
+
+如果想要用 ls 指令來確認其它資料夾中的檔案，可以在 ls 後面加上該資料夾的絕對路徑來達成。
+例如，想要確認 /data/usrhome/LabSPLin/splin01 中的一個資料夾「genomes」裡面有甚麼檔案，可以輸入指令如下:
+
+[splin01@node02 ~]$ ls /data/usrhome/LabSPLin/splin01/genomes
+
+便會跳出 genomes 這個資料夾中含有的檔案了。
+接著，可以利用上面提到的 cd 來移動到 genomes 資料夾內，輸入指令如下:
+
+[splin01@node02 ~]$ cd /data/usrhome/LabSPLin/splin01/genomes
+
+再用 pwd 確認所在位置，應該可以獲得以下結果:
+
+[splin01@node02 genomes]$ pwd
+/data/usrhome/LabSPLin/splin01/genomes
+
+可以發現已經來到 genomes 資料夾內了。
+想要回到原本的 splin01 資料夾，只要依樣畫葫蘆使用 cd 並輸入路徑即可，如下:
+
+[splin01@node02 ~]$ cd /data/usrhome/LabSPLin/splin01
+
+再使用 pwd 確認看看當前的路徑吧！
+
+
+
+＊相對路徑
+
+當確實了解絕對路徑的概念之後，會發現做甚麼都要打一大串路徑實在太麻煩，便可以開始使用相對路徑來進行各項工作。
+我們先來畫出三個資料夾的關係，以及它們的絕對路徑。
+
+splin01  絕對路徑: /data/usrhome/LabSPLin/splin01/
+   |
+   |
+   |
+genomes  絕對路徑: /data/usrhome/LabSPLin/splin01/genomes
+   |
+   |
+   |
+ UCSC    絕對路徑: /data/usrhome/LabSPLin/splin01/genomes/UCSC
+
+從這張圖可以看出來，splin01 內有個名為 genomes 的子資料夾，而 genomes 資料夾內又有一個名為 UCSC 的子資料夾。
+目前位在 splin01 的我們若想要觀察 genomes 資料夾內的檔案，除了像上述一樣打完整的絕對路徑以外，
+其實只要直接在 ls 後輸入 genomes，即可觀察 genomes 資料夾內的檔案，如下:
+
+[splin01@node02 ~]$ ls genomes
+
+這就是相對路徑的概念，只要打入該資料夾的名字就可以被認作路徑。
+有點類似，可以把你當前路徑的部分給省略，這種感覺。(雖然這樣說不正確，但希望比較好理解)
+同樣，我們可以使用 cd 與相對路徑來進入 genomes 資料夾，如下:
+
+[splin01@node02 ~]$ cd genomes
+
+使用 pwd 可以確認我們現在來到 genomes 資料夾內了，接下來便要解釋兩個相對路徑的重要概念。
+在相對路徑中:
+
+.   代表當前資料夾
+..  代表上一層資料夾
+
+以剛才的樹狀圖為例，我們目前在 genomes 資料夾內:
+
+splin01  絕對路徑: /data/usrhome/LabSPLin/splin01/
+   |     相對路徑: ..
+   |
+   |
+genomes  絕對路徑: /data/usrhome/LabSPLin/splin01/genomes
+   |     相對路徑: .
+   |
+   |
+ UCSC    絕對路徑: /data/usrhome/LabSPLin/splin01/genomes/UCSC
+         相對路徑: UCSC
+
+同樣可以使用 ls 加入不同的相對與絕對路徑，會更容易理解我的意思。
+從結果你會發現:
+
+[splin01@node02 ~]$ ls /data/usrhome/LabSPLin/splin01/
+[splin01@node02 ~]$ ls ..
+
+[splin01@node02 ~]$ ls /data/usrhome/LabSPLin/splin01/genomes
+[splin01@node02 ~]$ ls .
+
+[splin01@node02 ~]$ ls /data/usrhome/LabSPLin/splin01/genomes/UCSC
+[splin01@node02 ~]$ ls UCSC
+
+這三組的結果是相同的。
+相對路徑既然名為「相對」路徑，代表它是會隨著你的所在位置變動的。
+若是我們再進到 genomes 的子資料夾 UCSC 中，相對路徑也會隨之改變:
+
+splin01  絕對路徑: /data/usrhome/LabSPLin/splin01/
+   |     相對路徑: ../..
+   |
+   |
+genomes  絕對路徑: /data/usrhome/LabSPLin/splin01/genomes
+   |     相對路徑: ..
+   |
+   |
+ UCSC    絕對路徑: /data/usrhome/LabSPLin/splin01/genomes/UCSC
+         相對路徑: .
+
+可以發現，「..」是能夠進行疊加的，想要往上幾層疊加上去即可。
+我們可以利用這個相對路徑直接從 UCSC 資料夾回到 splin01 資料夾，如下:
+
+[splin01@node02 ~]$ cd ../..
+
+使用 pwd 可以發現回到 splin01 資料夾了，而目前的樹狀圖則改變如下:
+
+splin01  絕對路徑: /data/usrhome/LabSPLin/splin01/
+   |     相對路徑: .
+   |
+   |
+genomes  絕對路徑: /data/usrhome/LabSPLin/splin01/genomes
+   |     相對路徑: genomes
+   |
+   |
+ UCSC    絕對路徑: /data/usrhome/LabSPLin/splin01/genomes/UCSC
+         相對路徑: genomes/UCSC
 
 
