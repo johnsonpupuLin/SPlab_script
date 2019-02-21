@@ -6,7 +6,7 @@ However, it is not so difficult actually.
 You just need some practicing.
 
 
-# For whom who is ready to start running some script.
+# For whom that is ready to start running some script.
 It's the scripts from SP Lin's lab, collected and organized by HHL.
 That is, most of these scripts have beed used and modified by myself.
 
