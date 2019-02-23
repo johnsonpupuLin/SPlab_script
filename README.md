@@ -1,7 +1,9 @@
 
 # For Beginners
-If you are a beginner of using linux and learning bioinformatics, please read the file "basic_command" first. (wrote in Traditional Chinese)
-It might take some time and be frustrated to get used to linux.
+If you are a beginner of operating Linux and learning bioinformatics, please read the file "basic_tutorial" first. (wrote in Traditional Chinese)
+
+It is a file to help you get used to operating Linux
+It might take some time and be frustrated.
 However, it is not so difficult actually.
 You just need some practicing.
 
