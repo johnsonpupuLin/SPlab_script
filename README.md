@@ -1,17 +1,14 @@
 
 ## Greeting! If you are here, it might due to the requirements from Prof. SP, asking you to start to learn bioinformatics or search for some former scripts.
-
-## Please note the following instructions.
+Please note the following instructions.
 
 
 # For Beginners
 If you are a beginner of operating Linux and learning bioinformatics, please read the file "basic_tutorial" first. (wrote in Traditional Chinese)
-
 It is a file to help you get used to operating Linux, containing some initial knowledge such as logging in server and basic command.
 
 
 After you basically understand how Linux work, please read the file "advanced_tutorial". (wrote in Tranditional Chinese)
-
 It conntains some necessary skill and some of my notes for running scripts and analyzing our lab data.
 
 
