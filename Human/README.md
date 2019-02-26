@@ -142,6 +142,32 @@ In this step, you will like to predict the piRNA cluster, then analysis the poss
 	proTRAC_2.4.2.kw_mod.pl, this is the latest version of proTRAC. I mimiced the modification of KW and try to modifiy this version of script. 
 	However, the content in v2.4.2 is almost totaly different from v2.0.5. Therefore I could only try to switch on the "dual" promoter.
 
+#### II. piRPKM_calculating
+
 * extractCluster.sh
 
+	This script will extract the proTRAC result file "result.table" into much simpler form.
+
+* cluster_merging_bed.sh
+
+	For the piRPKM analysis of piRNA clusters in different samples, it is necessary to merge the predicted piRNA cluster from distinct datasets.
+	This script will integrate the predicted cluster from your input. It there are overlapped clusters, the widest range will be output.
+
+* cluster_piRPKM.sh
+
+	This script could calculate the piRPKM of your input cluster in specific dataset.
+
+#### III. piRNA_targeting
+
+* targeting_piRNA_bedtofasta.sh
+
+	In SP lab analysis flow, we only select the piRNAs generated from specific clusters (threshold like piRPKM > 10) to analyze targeting.
+	After selection, we tranfer the bed file into fasta format for the sequences. In this step, we would get the sense and antisense sequence simultaneous.
 	
+* targeting_piRNA_fasta_mapping.sh
+
+	After the above script, we map sense and antisense piRNA sequence to genome again. 
+	By doing this, we could find out the other sites among genome that these piRNA may originate (sense) or target (antisense).
+
+
+
