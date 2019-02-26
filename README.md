@@ -26,7 +26,7 @@ That is, most of these scripts have beed used and modified by myself.
 
 At the time point I constructed this repository, most of the analysis focused on human fetal gonad.
 Therefore, large part of scripts are included in "human" directory.
-However, if you are already familiar with linux, you can just modify the path of input and reference, then the script could be applied to other species.
+However, if you are already familiar with Linux, you can just modify the path of input and reference, then the script could be applied to other species.
 
 
 To a certain extent, this repository is only a backup for the script I've used before.
@@ -37,5 +37,5 @@ If you have any question, you can try to contact me.
 If I still remember how they work, I will try my best to solve your problem.
 
 
--HHL
+-HHL 2019
 
