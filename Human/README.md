@@ -124,4 +124,24 @@ In this step, you will like to figure out that whether your piRNA candidates pos
 
 ### 4. piRNA_cluster_analysis
 
+In this step, you will like to predict the piRNA cluster, then analysis the possible targeting sites of piRNA candidates.
 
+#### I. cluster_prediction
+
+* bamToEland3.sh
+
+	For the cluster prediction program "proTRAC", the input format should be eland3 file.
+	This script could transfer bam file to eland3 file.
+
+* proTRAC_cluster_prediction.sh
+
+	This script would run the proTRAC program file. There are two version of proTRAC.
+
+	proTRAC_2.0.5.kw_mod.pl, this is the original version modified and used by KW.
+	
+	proTRAC_2.4.2.kw_mod.pl, this is the latest version of proTRAC. I mimiced the modification of KW and try to modifiy this version of script. 
+	However, the content in v2.4.2 is almost totaly different from v2.0.5. Therefore I could only try to switch on the "dual" promoter.
+
+* extractCluster.sh
+
+	
