@@ -17,6 +17,11 @@ II. 使用終端機登入實驗室的 server 與一些前導小撇步
 
 使用終端機工具: pietty
 帳號密碼: 請查閱 trello
+
+我們的三個 server: splin01, splin02, splin03 分別存放不同類型的資料。
+splin01: 用來做分析與存放結果。
+splin02: 用來存放各式 reference 與 databases 以供分析使用。
+splin03: 用來存放所有的 raw data，最重要！
 若是成功登入後，應該可以看到下面的樣貌，以登入 splin01 為例:
 
 [splin01@node02 ~]$ 
