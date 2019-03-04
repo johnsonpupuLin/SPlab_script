@@ -174,5 +174,13 @@ In this step, you will like to predict the piRNA cluster, then analysis the poss
 	After the above script, we map sense and antisense piRNA sequence to genome again. 
 	By doing this, we could find out the other sites among genome that these piRNA may originate (sense) or target (antisense).
 
+#### IV. motif_analysis
+
+This step of analysis did not performed in human fetal gonad datasets.
+Therefore, the scripts are stored in "Mouse" directory.
+However, for the integrity of the flow of the small RNA datasets analysis in SP lab, I decide to incorporate this section in this instruction.
+
+
+
 
 
