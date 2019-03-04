@@ -1,10 +1,22 @@
-### link needed file
+#!/bin/bash
+
+#Program
+#	After recognizing highly represented motifs among cluster sets, the cluster possessing the specific motifs are identified.
+#	Next, the piRNAs generated from these clusters are isolated, then their potential targeting sites are identified.
+#Usage
+#	It is a flow, but not a script of analysis. Please refer to the command and modify by yourself.
+#History
+#2019/03/04, HHL
+#	Modified. Description added.
+
+
+#Make directories and link needed file.
 mkdir fasta
 mkdir motif
 mkdir HOMER
 
 
-###### run motif find
+#Apply Homer script to identify the clusters possessing specific motifs.
 homer2 find -i fasta/piRClust_upregulated.fasta -strand + -o HOMER/HOMER.piRClust_upregulated.zbtb12 -m motif/zbtb12.motif -offset 1 -p 4;
 homer2 find -i fasta/piRClust_upregulated.fasta -strand + -o HOMER/HOMER.piRClust_upregulated.stat3 -m motif/stat3.motif -offset 1 -p 4;
 homer2 find -i fasta/piRClust_upregulated.fasta -strand + -o HOMER/HOMER.piRClust_upregulated.foxp1 -m motif/foxp1.motif -offset 1 -p 4;
@@ -12,7 +24,8 @@ homer2 find -i fasta/piRClust_downregulated.fasta -strand + -o HOMER/HOMER.piRCl
 homer2 find -i fasta/piRClust_downregulated.fasta -strand + -o HOMER/HOMER.piRClust_downregulated.klf6 -m motif/klf6.motif -offset 1 -p 4;
 homer2 find -i fasta/piRClust_downregulated.fasta -strand + -o HOMER/HOMER.piRClust_downregulated.sp5 -m motif/sp5.motif -offset 1 -p 4;
 
-######### make piRNA targeting fasta
+
+#Identify the piRNAs generated from those clusters, then investigate their potential targeting sites.
 mkdir HOMER.piRClust.beds
 mkdir motif.piRC_class.piRNA
 
@@ -44,6 +57,4 @@ done
 
 
 rm temp.*
-
-#for i in $(ls HOMER/); do awk 'length(a[$1])==0{print $1;a[$1]=1}' HOMER/$i | grep -w -f - ../20160616_combine_clusters/all.cluster.fpkm_adjust.bed > temp.bed; cat ~/chicken_gonad_oxidation_piRNA/bed/*.uniq.bed12| intersectBed -wa -s -a - -b temp.bed > temp.intersectBed; awk 'BEGIN{FS=OFS="\t"}{for(i=0;i<$13;i++){t=$4;$4=t"_rep"i;print;$4=t}}' temp.intersectBed |fastaFromBed -s -name -fi ~/genomes/UCSC/galGal4/galGal4.fa -bed - -fo motif.piRC_class.piRNA/$i.sense.fasta; awk 'BEGIN{FS=OFS="\t"}{if($6=="+"){$6="-"}else{$6="+"} ;for(i=0;i<$13;i++){t=$4;$4=t"_rep"i;print;$4=t}}' temp.intersectBed |fastaFromBed -s -name -fi ~/genomes/UCSC/galGal4/galGal4.fa -bed - -fo motif.piRC_class.piRNA/$i.asense.fasta; wait; done; rm temp.*;
 
