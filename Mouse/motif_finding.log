@@ -1,0 +1,31 @@
+
+
+
+
+# Output RNA-seq RPKM upregulated and downregulated clusters
+awk '{if ($4>(1.5/1)){print}}' AD_AW_piRPKM_fold > piRNA_cluster_piRPKM_upregulated
+awk '{if ($4<(1/1.5)){print}}' AD_AW_piRPKM_fold > piRNA_cluster_piRPKM_downregulated
+
+# Paste start and end site of clusters
+awk 'NR == FNR{a[$1];next} $4 in a' piRNA_cluster_piRPKM_upregulated condensed_AB_merged_cluster.bed > piRNA_cluster_upregulated_whole
+awk 'NR == FNR{a[$1];next} $4 in a' piRNA_cluster_piRPKM_downregulated condensed_AB_merged_cluster.bed > piRNA_cluster_downregulated_whole
+
+
+# Replace start site by +/- 2kb
+awk -v us=2000 -v ds=2000 'BEGIN{FS=OFS="\t"}FNR==NR{len[$1]=$2;next}$6=="+"{$3=($2+ds<len[$1]?$2+ds:len[$1]); $2=($2-us>0?$2-us:0); print}$6=="-"{$2=($3-ds>0?$3-ds:0); $3=($3+us<len[$1]?$3+us:len[$1]);print}' ./mm10.chrom.sizes piRNA_cluster_upregulated_whole > piRClust_upregulated_2kb
+
+awk -v us=2000 -v ds=2000 'BEGIN{FS=OFS="\t"}FNR==NR{len[$1]=$2;next}$6=="+"{$3=($2+ds<len[$1]?$2+ds:len[$1]); $2=($2-us>0?$2-us:0); print}$6=="-"{$2=($3-ds>0?$3-ds:0); $3=($3+us<len[$1]?$3+us:len[$1]);print}' ./mm10.chrom.sizes piRNA_cluster_downregulated_whole > piRClust_downregulated_2kb
+
+
+# Running HOMER
+fastaFromBed -s -name -fi mm10.fa -bed piRClust_upregulated_2kb -fo piRClust_upregulated.fasta;
+findMotifs.pl piRClust_upregulated.fasta mouse HOMER.piRClust_upregulated -mset vertebrates -fastaBg mm10.fa -chopify -norevopp -nomotif -p 4
+
+fastaFromBed -s -name -fi mm10.fa -bed piRClust_downregulated_2kb -fo piRClust_downregulated.fasta;
+findMotifs.pl piRClust_downregulated.fasta mouse HOMER.piRClust_downregulated -mset vertebrates -fastaBg mm10.fa -chopify -norevopp -nomotif -p 4
+
+
+# For seqlogo
+findMotifs.pl piRClust_upregulated.fasta mouse HOMER.piRClust_upregulated_seqlogo -mset vertebrates -fastaBg mm10.fa -chopify -seqlogo -norevopp -nomotif -p 4
+findMotifs.pl piRClust_downregulated.fasta mouse HOMER.piRClust_downregulated_seqlogo -mset vertebrates -fastaBg mm10.fa -chopify -seqlogo -norevopp -nomotif -p 4
+
