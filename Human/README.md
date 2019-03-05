@@ -14,6 +14,7 @@ I might update some scripts of other analysis in the future.
 ## General Flow
 
 In general, the analysis is carried out in below order.
+Briefly, analysis of small RNA composition, piRNA characteristics, piRNA cluster prediction and targeting, motif enrichment are carried out step by step.
 There are different scripts in those directories. Moreover, the detailed instruction are written in scripts respectively.
 
 
@@ -180,7 +181,23 @@ This step of analysis did not performed in human fetal gonad datasets.
 Therefore, the scripts are stored in "Mouse" directory.
 However, for the integrity of the flow of the small RNA datasets analysis in SP lab, I decide to incorporate this section in this instruction.
 
+* motif_finding.log
 
+	After piRNA cluster prediction and calculation piRPKM, we could select clusters for further analysis.
+	First, we set a threshold, e.g. fold-change of piRPKM > 2, to select clusters.
+	Next, we extend the start site and end site by +/- 2kb to incorporate the promoter regions for motif enrichment analysis.
+	Afterward, the HOMER script "findMotifs.pl" could be applied to investigate the enriched motif among your selected clusters.
+
+* HOMER_Rscript.R
+
+	This R script is made by KW.
+	After "findMotifs.pl", this script could help you sort and figure out the enriched motifs of top 30% ranking via q value and percentage.
+	The top ranking motifs could be applied to later analysis.
+
+* motif_enriched_cluster_finding.sh
+
+	After identifying top ranking motifs, we could choose the motifs that we are interested in, and use this script to recognize the clusters that possess the specific motifs.
+	In the later part of the sciprt, it would isolate the piRNAs generated from those clusters possessing specific motifs, then investigate the potential targeting sites.
 
 
 
