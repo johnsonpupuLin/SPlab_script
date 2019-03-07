@@ -23,7 +23,7 @@ do
 	wait;
 	echo $input fasta has been generated;
 
-	echo Generate $input weblogo
+	echo Generate $input sequence logo
 	awk -F "\t" 'NR%2==0{$1=toupper(substr($1,1,20))}{print}' $desDir/$input.fasta| sed 's/T/U/g'|
-	seqlogo -T 0.5 -E 1 -F PNG -w 30 -o $input -k 1 -c -e -n -Y -f -
+	seqlogo -B 1 -T 0.2 -E 1 -F PNG -w 25 -o $input -k 1 -c -e -n -Y -f -
 done
